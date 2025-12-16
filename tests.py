@@ -1,4 +1,5 @@
 from functions.get_files_info import get_files_info
+from functions.get_file_content import get_file_content
 
 
 def main():
@@ -14,6 +15,10 @@ def main():
 
     other_contents = get_files_info(working_dir, "../")
     print(other_contents)
+
+    print(get_file_content(working_dir, "main.py"))
+    print(get_file_content(working_dir, "pkg/calculator.py"))
+    print(get_file_content(working_dir, "/bin/cat"))
 
 
 if __name__ == "__main__":
