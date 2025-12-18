@@ -2,7 +2,17 @@ import os
 from google.genai import types
 
 
-def get_files_info(working_directory, directory="."):
+def get_files_info(working_directory: str, directory: str = ".") -> str:
+    """
+    Lists files and directories with their sizes within the working directory.
+
+    Args:
+        working_directory: The base directory where operations are allowed
+        directory: Path to list contents from, relative to working_directory (defaults to ".")
+
+    Returns:
+        str: Formatted list of files/directories with size and type information, or error message
+    """
     abs_working_dir = os.path.abspath(working_directory)
     abs_directory = os.path.abspath(os.path.join(working_directory, directory))
 
@@ -21,6 +31,7 @@ def get_files_info(working_directory, directory="."):
     return final_response
 
 
+# Gemini Function Calling schema for get_files_info
 schema_get_files_info = types.FunctionDeclaration(
     name="get_files_info",
     description="Lists files in the specified directory along with their sizes, constrained to the working directory.",
