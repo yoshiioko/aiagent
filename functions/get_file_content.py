@@ -1,9 +1,20 @@
 import os
+from google.genai.types import FunctionDeclaration
 from config import MAX_CHARS
 from google.genai import types
 
 
-def get_file_content(working_directory, file_path):
+def get_file_content(working_directory: str, file_path: str) -> str:
+    """
+    Reads and returns the contents of a file within the working directory.
+
+    Args:
+        working_directory: The base directory where operations are allowed
+        file_path: Path to the file relative to working_directory
+
+    Returns:
+        str: File contents (truncated at MAX_CHARS), or error message
+    """
     abs_working_directory = os.path.abspath(working_directory)
     abs_file_path = os.path.abspath(os.path.join(working_directory, file_path))
 
@@ -24,7 +35,8 @@ def get_file_content(working_directory, file_path):
         return f"Exception reading file: {e}"
 
 
-schema_get_file_content = types.FunctionDeclaration(
+# Gemini Function Calling schema for get_file_content
+schema_get_file_content: FunctionDeclaration = FunctionDeclaration(
     name="get_file_content",
     description="Gets the contents of the given file as a string, constrained to the working directory.",
     parameters=types.Schema(

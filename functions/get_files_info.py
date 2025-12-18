@@ -1,5 +1,6 @@
 import os
 from google.genai import types
+from google.genai.types import FunctionDeclaration
 
 
 def get_files_info(working_directory: str, directory: str = ".") -> str:
@@ -32,7 +33,7 @@ def get_files_info(working_directory: str, directory: str = ".") -> str:
 
 
 # Gemini Function Calling schema for get_files_info
-schema_get_files_info = types.FunctionDeclaration(
+schema_get_files_info: FunctionDeclaration = FunctionDeclaration(
     name="get_files_info",
     description="Lists files in the specified directory along with their sizes, constrained to the working directory.",
     parameters=types.Schema(
