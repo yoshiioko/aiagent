@@ -8,7 +8,17 @@ from google.genai import types
 working_directory = "calculator"
 
 
-def call_function(function_call_part, verbose=False):
+def call_function(function_call_part: types.Part, verbose: bool = False) -> types.Content:
+    """
+    Routes and executes function calls from the AI agent, returning results as tool responses.
+
+    Args:
+        function_call_part: The function call part containing name and arguments
+        verbose: Whether to print detailed function call information (defaults to False)
+
+    Returns:
+        types.Content: Tool response containing function result or error message
+    """
     if verbose:
         print(f"Calling function: {function_call_part.name}({function_call_part.args})")
     else:
