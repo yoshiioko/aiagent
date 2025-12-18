@@ -1,9 +1,21 @@
 import os
 import subprocess
 from google.genai import types
+from google.genai.types import FunctionDeclaration
 
 
-def run_python_file(working_directory: str, file_path: str, args=None) -> str:
+def run_python_file(working_directory: str, file_path: str, args: list[str] | None = None) -> str:
+    """
+    Runs a Python file with the python3 interpreter.
+
+    Args:
+        working_directory: The base directory where operations are allowed
+        file_path: Path to the Python file relative to working_directory
+        args: Optional list of CLI arguments to pass to the Python file
+
+    Returns:
+        str: Combined stdout/stderr output and exit code information
+    """
     if args is None:
         args = []
 
@@ -45,7 +57,8 @@ STDERR: {output.stderr.decode('utf-8')}
         return f'Error: executing Python file: {e}'
 
 
-schema_run_python_file = types.FunctionDeclaration(
+# Gemini Function Calling schema for run_python_file
+schema_run_python_file: FunctionDeclaration = FunctionDeclaration(
     name="run_python_file",
     description="Runs a python file with the python3 interpreter. Accepts additional CLI args as an optional array.",
     parameters=types.Schema(
