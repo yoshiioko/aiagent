@@ -1,3 +1,11 @@
+"""
+Main entry point for the AI Coding Agent.
+
+Initializes the Gemini AI client and manages the conversation loop between the user
+and the AI agent, handling function calls and generating responses.
+"""
+
+
 import os
 import sys
 from dotenv import load_dotenv
@@ -11,6 +19,20 @@ from call_function import call_function
 
 
 def main():
+    """
+    Runs the AI coding agent conversation loop.
+
+    Loads environment variables, initializes the Gemini client, and processes user prompts
+    through an iterative conversation with the AI agent. Handles function calls and displays
+    final responses.
+
+    Command-line Args:
+        sys.argv[1]: The user's prompt message (required)
+        sys.argv[2]: Optional "--verbose" flag for detailed output
+
+    Exits:
+        System exit with code 1 if no prompt is provided
+    """
     load_dotenv()
     api_key = os.environ.get("GEMINI_API_KEY")
     client = genai.Client(api_key=api_key)
